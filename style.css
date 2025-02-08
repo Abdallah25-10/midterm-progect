@@ -1,0 +1,164 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    background-color:rgba(25, 239, 28, 0.1);
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+nav {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 12px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+nav a {
+    color: white;
+    margin: 0 20px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #28a745;
+}
+
+.container {
+    margin-top: 60px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    width: 100%;
+    transition: box-shadow 0.3s ease;
+}
+
+.container:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+input[type="text"], input[type="number"], select {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    margin: 12px 0;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus, input[type="number"]:focus, select:focus {
+    border-color: #28a745;
+    outline: none;
+}
+
+label {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    text-align: left;
+    display: block;
+    color: #333;
+}
+
+button {
+    margin-top: 25px;
+    padding: 18px;
+    background: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    width: 100%;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background: #218838;
+}
+
+button:active {
+    background: #1e7e34;
+}
+
+.grades {
+    margin-top: 20px;
+    width: 100%;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background: #f8f8f8;
+    margin: 8px 0;
+    padding: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+li button {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    padding: 8px 16px;
+    transition: background-color 0.3s ease;
+}
+
+li button:hover {
+    background: #c0392b;
+}
+
+li button:active {
+    background: #a93226;
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        margin-top: 30px;
+        padding: 20px;
+    }
+
+    input[type="text"], input[type="number"], select {
+        width: 100%;
+    }
+
+    button {
+        width: 100%;
+        font-size: 16px;
+    }
+
+    nav {
+        padding: 12px 0;
+    }
+
+    nav a {
+        margin: 0 15px;
+        font-size: 16px;
+    }
+
+    .grades input {
+        width: 100%;
+    }
+
+    .about-content {
+        padding: 20px;
+        font-size: 16px;
+    }
+}

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Marks Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <a href="about.html">About</a>
+    </nav>
+
+    <div class="container">
+        <h2>Class Marks Manager</h2>
+    
+        <input type="text" id="studentName" placeholder="Enter student name">
+    
+        <select id="subject">
+            <option value="Math">Math</option>
+            <option value="History">History</option>
+            <option value="English">English</option>
+            <option value="Physics">Physics</option>
+            <option value="Biology">Biology</option>
+            <option value="Chemistry">Chemistry</option>
+            <option value="Geography">Geography</option>
+            <option value="Civic">Civic</option>
+            <option value="Philosophy">Philosophy</option>
+            <option value="Economics">Economics</option>
+            <option value="Sociology">Sociology</option>
+            <option value="Religion">Religion</option>
+            <option value="Activities">Activities</option>
+            <option value="Arabic">Arabic</option>
+            <option value="Library">Library</option>
+        </select>
+
+        <input type="number" id="totalMarks" placeholder="Enter total marks for the subject" min="1">
+    
+        <input type="number" id="studentMark" placeholder="Enter student mark" min="0">
+    
+        <button onclick="addMark()">Add Mark</button>
+    
+        <ul id="marksList"></ul>
+    </div>
+    
+
+    <script>
+    function addMark() {
+        let name = document.getElementById("studentName").value.trim();
+        let subject = document.getElementById("subject").value;
+        let mark = document.getElementById("studentMark").value.trim();
+        let totalMarks = document.getElementById("totalMarks").value.trim();
+        
+        if (name === "" || mark === "" || isNaN(mark) || totalMarks === "" || isNaN(totalMarks)) {
+            alert("Please enter a valid name, mark, and total marks.");
+            return;
+        }
+
+        if (parseFloat(mark) > parseFloat(totalMarks)) {
+            alert("Mark cannot exceed total marks for the subject.");
+            return;
+        }
+        
+        let marks = JSON.parse(localStorage.getItem("marks")) || [];
+        let student = marks.find(entry => entry.name === name);
+        
+        if (!student) {
+            student = { name, subjects: {} };
+            marks.push(student);
+        }
+
+        student.subjects[subject] = {
+            mark: parseFloat(mark),
+            totalMarks: parseFloat(totalMarks),
+            scaledMark: (parseFloat(mark) / parseFloat(totalMarks)) * 20
+        };
+
+        localStorage.setItem("marks", JSON.stringify(marks));
+
+        displayMarks();
+    }
+
+    function displayMarks() {
+        let marks = JSON.parse(localStorage.getItem("marks")) || [];
+        let marksList = document.getElementById("marksList");
+        marksList.innerHTML = "";
+        
+        marks.forEach((entry, index) => {
+            let total = 0, count = 0;
+            let li = document.createElement("li");
+            li.innerHTML = `<strong>${entry.name}</strong> - `;
+            
+            for (let subject in entry.subjects) {
+                let mark = entry.subjects[subject].mark;
+                let totalMarks = entry.subjects[subject].totalMarks;
+
+                li.innerHTML += `${subject}: ${mark} / ${totalMarks} | `;
+                total += (mark / totalMarks);
+                count++;
+            }
+
+            let average = count ? ((total / count) * 20).toFixed(2) : "N/A";
+            li.innerHTML += ` <strong>Average:</strong> ${average} / 20`;
+            
+            let removeBtn = document.createElement("button");
+            removeBtn.textContent = "X";
+            removeBtn.onclick = function() { removeMark(index); };
+            li.appendChild(removeBtn);
+            marksList.appendChild(li);
+        });
+    }
+
+    function removeMark(index) {
+        let marks = JSON.parse(localStorage.getItem("marks")) || [];
+        marks.splice(index, 1);
+        localStorage.setItem("marks", JSON.stringify(marks));
+        displayMarks();
+    }
+
+    document.addEventListener("DOMContentLoaded", displayMarks);
+    </script>
+</body>
+</html>
